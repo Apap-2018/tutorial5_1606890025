@@ -1,0 +1,27 @@
+<!DOCTYPE Html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>View Pilot</title>
+    </head>
+
+    <body>
+        <h3 th:text="'Pilot License Number: ' + ${pilot.getLicenseNumber()}"></h3>
+        <h3 th:text="'Name: ' + ${pilot.getName()}"></h3>
+        <h3 th:text="'Fly Hour: ' + ${pilot.getFlyHour()}"></h3>
+        <td><a th:href="@{/pilot/delete(licenseNumber=${pilot.getLicenseNumber()})}" th:method="post">Delete Pilot</a></td>
+        
+        <a th:href="@{/flight/add/{licenseNumber}(licenseNumber=${pilot.getLicenseNumber()})}">Add Flight</a>
+
+        <!-- <td><a th:href="@{/pilot/add-flight(licenseNumber=${pilot.getLicenseNumber()})}">Add Flight</a></td> -->
+
+        <div th:each="flight: ${pilot.getPilotFlight()}">
+            <p>=======================================================================</p>
+            <p th:text="${flight.getFlightNumber()}"></p>
+            <p th:text="'from ' + ${flight.getOrigin()} + ' to ' + ${flight.getDestination()} + ' at ' + ${flight.getTime()}"></p>
+            <span><a th:href="@{/flight/update(flightNumber=${flight.getFlightNumber()})}">Update Flight</a></span>
+            <span><a th:href="@{/flight/delete(id=${flight.getId()})}">Delete Flight</a></span>
+        </div>
+    </body>
+
+</html>

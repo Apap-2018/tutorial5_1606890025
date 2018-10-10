@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Add Flight to Pilot</title>
+    </head>
+
+    <body>
+        <h3>Tambah Penerbangan pada Pilot</h3>
+        <h3 th:text="${pilot.getName()}"></h3>
+        <form th:action="@{/pilot/add-flight(licenseNumber=${pilot.getLicenseNumber()})}" method="POST">
+            Flight Number: <br>
+            <input type="text" name="flightNumber"/>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>

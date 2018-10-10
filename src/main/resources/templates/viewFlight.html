@@ -1,0 +1,17 @@
+<!DOCTYPE Html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>View Flight</title>
+    </head>
+
+    <body th:switch="${flight}">
+        <h3 th:case="null">Penerbangan Tidak Ditemukan</h3>
+        <div th:case="*">
+            <h3 th:text="'Flight Number: ' + ${flight.getFlightNumber()}"></h3>
+            <h3 th:text="'Pilots Name: ' + ${flight.getPilot().getName()}"></h3>
+            <h3 th:text="'Pilots License Number: ' + ${flight.getPilot().getLicenseNumber()}"></h3>
+        </div>
+    </body>
+
+</html>
