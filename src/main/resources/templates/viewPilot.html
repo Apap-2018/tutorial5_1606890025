@@ -17,7 +17,7 @@
         <h3 th:unless="${pilot.flyHour} >= 100">Status: Pilot Junior</h3>
         <td><a th:href="@{/pilot/delete(licenseNumber=${pilot.getLicenseNumber()})}" th:method="post">Delete Pilot</a></td>
         
-        <a th:href="@{/flight/add(licenseNumber=${pilot.getLicenseNumber()})}">Add Flight</a>
+        <a th:href="@{/flight/add/{licenseNumber}(licenseNumber=${pilot.getLicenseNumber()})}">Add Flight</a>
 
         <form th:action="@{/flight/delete}" th:object="${pilot}" method="POST"> 
             <input type="hidden" th:field=*{id}>

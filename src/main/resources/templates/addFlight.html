@@ -10,34 +10,34 @@
     <body>
         <nav th:replace="fragments/fragment :: navbar(navbar_title='Add Flight')"></nav>
         <div class="container-fluid">
-                <h2>Hello!</h2>
+            <h2>Hello!</h2>
 
-                <h3>Tambah Penerbangan</h3>
-                <form th:action="@{/flight/add}" th:object="${flight}" th:with="reps=1" method="POST">
-                    <input type="hidden" th:field="*{pilot}"/>    
-
-                    <table>
-                        <thead>
-                            <td>Flight Number</td>
-                            <td>Origin</td>
-                            <td>Destination</td>
-                            <td>Time</td>
-                        </thead>
-
-                        <tbody>
-                            <tr> 
-                                <td><input type="text" name="flightNumber" /></td>
-                                <td><input type="text" name="origin"></td>
-                                <td><input type="text" name="destination"></td>
-                                <td><input type="date" name="time"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <button type="submit" name="addRow">add more</button>
-                    <br><br>
-                    <button type="submit">Submit</button>
-                </form>
+            <h3>Tambah Penerbangan</h3>
+            <p th:text="${flightList}"></p>
+            <form th:action="@{/flight/add/{licenseNumber}(licenseNumber=${pilot.licenseNumber})}" th:object="${pilot}" method="POST">
+                <input type="hidden" th:field="*{licenseNumber}"/>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Flight Number</th>
+                            <th>Origin</th>
+                            <th>Destination</th>
+                            <th>Time</th>
+                            <th><button type="submit" name="addRow">Add</button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="flight, iterationStatus : *{pilotFlight}">
+                            <td><input type="text" th:field="*{pilotFlight[__${iterationStatus.index}__].flightNumber}" /></td>
+                            <td><input type="text" th:field="*{pilotFlight[__${iterationStatus.index}__].origin}" /></td>
+                            <td><input type="text" th:field="*{pilotFlight[__${iterationStatus.index}__].destination}" /></td>
+                            <td><input type="date" th:field="*{pilotFlight[__${iterationStatus.index}__].time}" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit" name="submit">Save</button>
+            </form>
         </div>
     </body>
 </html>
