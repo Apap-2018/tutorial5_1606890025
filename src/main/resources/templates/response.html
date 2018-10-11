@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Add</title>
+        <title>APAP</title>
+        <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+        <object th:include="fragments/fragment :: js" th:remove="tag"></object>
     </head>
 
     <body>
+        <nav th:replace="fragments/fragment :: navbar(navbar_title='APAP')"></nav>
+        
         <h2 th:text="${response}"></h2>
     </body>
     

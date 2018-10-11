@@ -1,11 +1,11 @@
-package com.apap.tutorial4.controller;
+package com.apap.tutorial5.controller;
 
 import javax.persistence.EntityManager;
 
-import com.apap.tutorial4.model.FlightModel;
-import com.apap.tutorial4.model.PilotModel;
-import com.apap.tutorial4.service.FlightService;
-import com.apap.tutorial4.service.PilotService;
+import com.apap.tutorial5.model.FlightModel;
+import com.apap.tutorial5.model.PilotModel;
+import com.apap.tutorial5.service.FlightService;
+import com.apap.tutorial5.service.PilotService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,9 +48,10 @@ public class FlightController {
     }
 
     @RequestMapping(value = "/flight/delete")
-    private String deleteFlightSubmit(@RequestParam(value = "flightNumber", required = true) String flightNumber, Model model) {
-        String response = flightService.deleteFlight(flightNumber) ? "Berhasil Menghapus Penerbangan" : "Gagal Menghapus Penerbangan";
-        model.addAttribute("response", response);
+    private String deleteFlightSubmit(@ModelAttribute PilotModel pilot, Model model) {
+        for (FlightModel flight : pilot.getPilotFlight()) {
+            flightService.deleteFlightById(flight.getId());
+        }
         return "response";
     }
 
@@ -66,4 +67,5 @@ public class FlightController {
         model.addAttribute("response", "Berhasil Mengubah Data Penerbangan");
         return "response";
     }
+
 }

@@ -1,11 +1,11 @@
-package com.apap.tutorial4.controller;
+package com.apap.tutorial5.controller;
 
 import javax.websocket.server.PathParam;
 
-import com.apap.tutorial4.model.FlightModel;
-import com.apap.tutorial4.model.PilotModel;
-import com.apap.tutorial4.service.FlightService;
-import com.apap.tutorial4.service.PilotService;
+import com.apap.tutorial5.model.FlightModel;
+import com.apap.tutorial5.model.PilotModel;
+import com.apap.tutorial5.service.FlightService;
+import com.apap.tutorial5.service.PilotService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class PilotController {
 
     @RequestMapping(value = "/pilot/view")
     private String viewPilot(@RequestParam(value = "licenseNumber", required = true) String licenseNumber, Model model) {
-    PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
+        PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
         model.addAttribute("pilot", pilot);
         return "viewPilot"; 
     }
@@ -51,15 +51,16 @@ public class PilotController {
 
     @RequestMapping(value = "/pilot/add-flight", method = RequestMethod.GET)
     private String pilotAddFlight(@RequestParam(value = "licenseNumber", required = true) String licenseNumber, Model model) {
-    PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
+        PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
         model.addAttribute("pilot", pilot);
         return "pilotAddFlight";
     }
 
     @RequestMapping(value = "/pilot/delete")
-    private String deletePilot(@RequestParam(value = "licenseNumber", required = true) String licenseNumber, Model model) {
-        String response = pilotService.deletePilotByLicenseNumber(licenseNumber) ? "Berhasil Menghapus Pilot" : "Gagal Menghapus Pilot";
-        model.addAttribute("response", response);
+    private String deletePilot(@ModelAttribute PilotModel pilot, Model model) {
+        for (FlightModel flight : pilot.getPilotFlight()) {
+            flightService.deleteFlight(flight.getFlightNumber());
+        }
         return "response";
     }
     

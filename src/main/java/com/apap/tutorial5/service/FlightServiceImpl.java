@@ -1,7 +1,7 @@
-package com.apap.tutorial4.service;
+package com.apap.tutorial5.service;
 
-import com.apap.tutorial4.model.FlightModel;
-import com.apap.tutorial4.repository.FlightDb;
+import com.apap.tutorial5.model.FlightModel;
+import com.apap.tutorial5.repository.FlightDb;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +23,11 @@ public class FlightServiceImpl implements FlightService {
     public boolean deleteFlight(String flightNumber) {
         flightDb.delete(this.getFlightDetailByFlightNumber(flightNumber));
         return flightDb.findByFlightNumber(flightNumber) == null;
+    }
+
+    @Override
+    public void deleteFlightById(long id) {
+        flightDb.deleteById(id);
     }
 
     @Override

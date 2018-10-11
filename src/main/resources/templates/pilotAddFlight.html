@@ -3,9 +3,13 @@
 
     <head>
         <title>Add Flight to Pilot</title>
+        <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+        <object th:include="fragments/fragment :: js" th:remove="tag"></object>
     </head>
 
     <body>
+        <nav th:replace="fragments/fragment :: navbar(navbar_title='Pilot Add Flight')"></nav>
+        
         <h3>Tambah Penerbangan pada Pilot</h3>
         <h3 th:text="${pilot.getName()}"></h3>
         <form th:action="@{/pilot/add-flight(licenseNumber=${pilot.getLicenseNumber()})}" method="POST">

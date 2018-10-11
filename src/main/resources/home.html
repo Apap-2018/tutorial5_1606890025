@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>home</title>
+        <link rel="stylesheet" href="@{/css/bootstrap.min.css}">
+        <script th:src="@{/js/bootsrap.min.js}"></script>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a href="#" class="navbar-brand">APAP</a>
+            <div class="collapese navbar-collapse" id="navbarSuppoertedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="container-fluid">
+            <h2>hello</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Tambah Pilot
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Fitur untuk menambah pilot</p>
+                            <a th:href="@{/pilot/add}" class="btn btn-primary">Tambah</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Cari Pilot berdasarkan Nomor Lisensi
+                    </div>
+                    <form th:action="@{/pilot/view}" method="GET">
+                        <div class="card-body">
+                            <label for="licenseNumber">Nomor Lisensi:</label>
+                            <input type="text" name="licenseNumber" class="form-control">
+                            <button class="btn btn-primary" type="submit">Cari</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

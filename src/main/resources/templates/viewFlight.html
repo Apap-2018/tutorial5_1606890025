@@ -3,9 +3,13 @@
 
     <head>
         <title>View Flight</title>
+        <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+        <object th:include="fragments/fragment :: js" th:remove="tag"></object>
     </head>
 
-    <body th:switch="${flight}">
+    <body>
+        <nav th:replace="fragments/fragment :: navbar(navbar_title='View Flight')"></nav>
+
         <h3 th:case="null">Penerbangan Tidak Ditemukan</h3>
         <div th:case="*">
             <h3 th:text="'Flight Number: ' + ${flight.getFlightNumber()}"></h3>

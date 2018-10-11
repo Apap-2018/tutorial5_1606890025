@@ -3,27 +3,42 @@
 
     <head>
         <title>Add Flight</title>
+        <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+        <object th:include="fragments/fragment :: js" th:remove="tag"></object>
     </head>
 
     <body>
-        <h2>Hello!</h2>
+        <nav th:replace="fragments/fragment :: navbar(navbar_title='Add Flight')" th:with="reps=0"></nav>
+        <div class="container-fluid">
+                <h2>Hello!</h2>
 
-        <h3>Tambah Penerbangan</h3>
-        <form th:action="@{/flight/add}" th:object="${flight}" method="POST">
-            <input type="hidden" th:field="*{pilot}"/>    
-            FlightNumber: <br>
-            <input type="text" name="flightNumber" />
-            <br>
-            Origin: <br>
-            <input type="text" name="origin">
-            <br>
-            Destination <br>
-            <input type="text" name="destination">
-            <br>
-            Time: <br>
-            <input type="date" name="time">
-            <br><br>
-            <button type="submit">Submit</button>
-        </form>
+                <h3>Tambah Penerbangan</h3>
+                <form th:action="@{/flight/add}" th:object="${flight}" th:with="reps=1" method="POST">
+                    <input type="hidden" th:field="*{pilot}"/>    
+
+                    <table>
+                        <thead>
+                            <td>Flight Number</td>
+                            <td>Origin</td>
+                            <td>Destination</td>
+                            <td>Time</td>
+                        </thead>
+
+                        <tbody>
+                            <tr th:each="rep: ${#numbers.sequence( 1, reps ) }"> 
+                                <td><input type="text" name="flightNumber" /></td>
+                                <td><input type="text" name="origin"></td>
+                                <td><input type="text" name="destination"></td>
+                                <td><input type="date" name="time"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button >add more</button>
+                    <br><br>
+                    <button type="submit">Submit</button>
+                </form>
+        </div>
     </body>
 </html>
+

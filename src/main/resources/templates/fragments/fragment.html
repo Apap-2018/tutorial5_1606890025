@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Home</title>
+
+        <head th:fragment="css">
+            <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        </head>
+
+        <head th:fragment="js">
+            <script th:src="@{/js/bootsrap.min.js}"></script>            
+        </head>
+    </head>
+
+    <body>
+        <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a href="#" class="navbar-brand" th:text=${navbar_title}></a>
+            <div class="collapese navbar-collapse" id="navbarSuppoertedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </body>
+</html>
