@@ -8,7 +8,7 @@
     </head>
 
     <body>
-        <nav th:replace="fragments/fragment :: navbar(navbar_title='Add Flight')" th:with="reps=0"></nav>
+        <nav th:replace="fragments/fragment :: navbar(navbar_title='Add Flight')"></nav>
         <div class="container-fluid">
                 <h2>Hello!</h2>
 
@@ -25,7 +25,7 @@
                         </thead>
 
                         <tbody>
-                            <tr th:each="rep: ${#numbers.sequence( 1, reps ) }"> 
+                            <tr> 
                                 <td><input type="text" name="flightNumber" /></td>
                                 <td><input type="text" name="origin"></td>
                                 <td><input type="text" name="destination"></td>
@@ -34,7 +34,7 @@
                         </tbody>
                     </table>
 
-                    <button >add more</button>
+                    <button type="submit" name="addRow">add more</button>
                     <br><br>
                     <button type="submit">Submit</button>
                 </form>
